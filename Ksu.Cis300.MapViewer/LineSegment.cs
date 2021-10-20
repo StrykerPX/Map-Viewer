@@ -12,17 +12,17 @@ namespace Ksu.Cis300.MapViewer
         /// <summary>
         /// 
         /// </summary>
-        PointF Start { get; }
+        public PointF Start { get; }
 
         /// <summary>
         /// 
         /// </summary>
-        PointF End { get;  }
+        public PointF End { get;  }
 
         /// <summary>
         /// 
         /// </summary>
-        Pen Pen { get; }
+        public Pen Pen { get; }
         /// <summary>
         /// 
         /// </summary>

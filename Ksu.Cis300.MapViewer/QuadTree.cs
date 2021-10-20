@@ -56,5 +56,52 @@ namespace Ksu.Cis300.MapViewer
                 }
             }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="t"></param>
+        /// <param name="line"></param>
+        /// <param name="zoom"></param>
+        private static void AddLine(BinaryTreeNode<MapData> t, LineSegment line, int zoom)
+        {
+            if ()
+            {
+                line = line.Reflect();
+            }
+
+            if (zoom == t.Data.Zoom)
+            {
+                t.Data.Lines.Add(line);
+            }
+            else
+            {
+                if (line.End.X <= t.Data.Bounds.Left)
+                {
+
+                }
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public BinaryTreeNode<MapData> ReadFile(string fileName)
+        {
+
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="g"></param>
+        /// <param name="zoom"></param>
+        /// <param name="sacle"></param>
+        public void Draw(Graphics g, int zoom, int sacle)
+        {
+
+        }
     }
 }
