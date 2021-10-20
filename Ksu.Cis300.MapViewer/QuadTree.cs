@@ -45,10 +45,12 @@ namespace Ksu.Cis300.MapViewer
                 {
                     if (bounds.Height * bounds.Width < DrawingQuadThreshold)
                     {
+                        RectangleF leftRightBound = new RectangleF();
                         return new BinaryTreeNode<MapData>(mapData, BuildTree(bounds, zoom, isQuadTreeNode), BuildTree(bounds, zoom, isQuadTreeNode));
                     }
                     else
                     {
+                        RectangleF
                         return new BinaryTreeNode<MapData>(mapData, BuildTree(bounds, zoom, isQuadTreeNode), BuildTree(bounds, zoom, isQuadTreeNode));
                     }
                 }

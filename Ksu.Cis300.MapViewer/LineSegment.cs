@@ -42,7 +42,7 @@ namespace Ksu.Cis300.MapViewer
         /// <returns></returns>
         public LineSegment Reflect()
         {
-            PointF newStart = new PointF(Start.Y, Start.Y);
+            PointF newStart = new PointF(Start.Y, Start.X);
             PointF newEnd = new PointF(End.Y, End.X);
 
             LineSegment lineSegment = new LineSegment(newStart, newEnd, Pen);
@@ -58,7 +58,7 @@ namespace Ksu.Cis300.MapViewer
         /// <param name="right"></param>
         public void Split(float x, out LineSegment left, out LineSegment right)
         {
-            PointF splitPoint= new PointF(x, Start.Y);
+            PointF splitPoint= new PointF(x, Start.Y - End.Y);
 
             left = new LineSegment(Start, splitPoint, Pen);
             right = new LineSegment(splitPoint, End, Pen);
