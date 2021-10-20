@@ -45,13 +45,21 @@ namespace Ksu.Cis300.MapViewer
                 {
                     if (bounds.Height * bounds.Width < DrawingQuadThreshold)
                     {
-                        RectangleF leftRightBound = new RectangleF();
-                        return new BinaryTreeNode<MapData>(mapData, BuildTree(bounds, zoom, isQuadTreeNode), BuildTree(bounds, zoom, isQuadTreeNode));
+                        RectangleF leftBounds = new RectangleF(bounds.X, bounds.Y, (bounds.Width) / 2, bounds.Height);
+                        RectangleF rightBounds = new RectangleF((bounds.Width) / 2, bounds.Y, (bounds.Width) / 2, bounds.Height);
+                        return new BinaryTreeNode<MapData>(mapData, BuildTree(leftBounds, zoom, isQuadTreeNode), BuildTree(rightBounds, zoom, isQuadTreeNode));
                     }
                     else
                     {
-                        RectangleF
-                        return new BinaryTreeNode<MapData>(mapData, BuildTree(bounds, zoom, isQuadTreeNode), BuildTree(bounds, zoom, isQuadTreeNode));
+                        RectangleF topBounds = new RectangleF(bounds.X, bounds.Y, (bounds.Width) / 2, bounds.Height);
+                        RectangleF bottomBounds = new RectangleF(bounds.X, (bounds.Height) / 2, bounds.Width, (bounds.Height) / 2);
+
+                        if (bounds.Width * bounds.Height < DrawingQuadThreshold)
+                        {
+                            zoom = zoom + 1;
+                        }
+
+                        return new BinaryTreeNode<MapData>(mapData, BuildTree(topBounds, zoom, isQuadTreeNode), BuildTree(bottomBounds, zoom, isQuadTreeNode));
                     }
                 }
             }
@@ -65,20 +73,25 @@ namespace Ksu.Cis300.MapViewer
         /// <param name="zoom"></param>
         private static void AddLine(BinaryTreeNode<MapData> t, LineSegment line, int zoom)
         {
-            if ()
-            {
-                line = line.Reflect();
-            }
-
             if (zoom == t.Data.Zoom)
             {
                 t.Data.Lines.Add(line);
             }
             else
             {
-                if (line.End.X <= t.Data.Bounds.Left)
+                float temp;
+                if (t.Data.Lines != null)
                 {
-
+                    temp = t.Data.Bounds.X + (t.Data.Bounds.Width) / 2;
+                }
+                else if (t.Data.Lines == null)
+                {
+                    temp = t.Data.Bounds.Y + (t.Data.Bounds.Height) / 2;
+                    t.RightChild.Data.Lines.Add(line.Reflect());
+                }
+                else
+                {
+                    
                 }
             }
         }
