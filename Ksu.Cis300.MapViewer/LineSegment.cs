@@ -29,7 +29,7 @@ namespace Ksu.Cis300.MapViewer
         /// <param name="start"></param>
         /// <param name="end"></param>
         /// <param name="pen"></param>
-        LineSegment(PointF start, PointF end, Pen pen)
+        public LineSegment(PointF start, PointF end, Pen pen)
         {
             Start = start;
             End = end;
