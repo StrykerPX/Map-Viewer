@@ -31,21 +31,18 @@ namespace Ksu.Cis300.MapViewer
         /// <returns>re</returns>
         private static BinaryTreeNode<MapData> BuildTree(RectangleF bounds, int zoom, bool isQuadTreeNode)
         {
-            
+            MapData mapData = new MapData(bounds, zoom, isQuadTreeNode);
             if (zoom == MaximumZoom)
             {
-                MapData mapData = new MapData(bounds, zoom, true);
                 return new BinaryTreeNode<MapData>(mapData, null, null);
             }
             else
             {
-                int tempZoom = zoom;
                 if (isQuadTreeNode)
                 {
-                    MapData mapData = new MapData(bounds, zoom, isQuadTreeNode);
                     RectangleF leftBounds = new RectangleF(bounds.X, bounds.Y, (bounds.Width) / 2, bounds.Height);
                     RectangleF rightBounds = new RectangleF(bounds.X + (bounds.Width) / 2, bounds.Y, (bounds.Width) / 2, bounds.Height);
-                    return new BinaryTreeNode<MapData>(mapData, BuildTree(leftBounds, tempZoom, !isQuadTreeNode), BuildTree(rightBounds, tempZoom, !isQuadTreeNode));
+                    return new BinaryTreeNode<MapData>(mapData, BuildTree(leftBounds, zoom, !isQuadTreeNode), BuildTree(rightBounds, zoom, !isQuadTreeNode));
                 }
                 else
                 {
@@ -54,11 +51,10 @@ namespace Ksu.Cis300.MapViewer
 
                     if (bounds.Width * bounds.Height < DrawingQuadThreshold)
                     {
-                        tempZoom ++;
+                        zoom ++;
                     }
-                    MapData mapData = new MapData(bounds, zoom, isQuadTreeNode);
 
-                    return new BinaryTreeNode<MapData>(mapData, BuildTree(topBounds, tempZoom, !isQuadTreeNode), BuildTree(bottomBounds, tempZoom, !isQuadTreeNode));
+                    return new BinaryTreeNode<MapData>(mapData, BuildTree(topBounds, zoom, !isQuadTreeNode), BuildTree(bottomBounds, zoom, !isQuadTreeNode));
                 }
             }
         }
@@ -149,22 +145,22 @@ namespace Ksu.Cis300.MapViewer
                     {
                         if (!(end.X >= 0 && end.X <= tree.Data.Bounds.Width && end.Y >= 0 && end.Y <= tree.Data.Bounds.Height))
                         {
-                            throw new IOException("Out of bound.");
+                            throw new IOException("Line n describes a street that is not within the map bounds.");
                         }
                     }
                     else
                     {
-                        throw new IOException("Out of bound.");
+                        throw new IOException("Line n describes a street that is not within the map bounds.");
                     }
 
                     if (length <= 0)
                     {
-                        throw new IOException("Invalid line.");
+                        throw new IOException("Line 1 contains a non-positive value.");
                     }
 
-                    if (!(zoom >= 0 && zoom < MaximumZoom))
+                    if (zoom < 1 || zoom > MaximumZoom)
                     {
-                        throw new IOException("Zoom out of bound.");
+                        throw new IOException("Line n contains an invalid zoom level.");
                     }
 
                     Pen pen = new Pen(Color.FromArgb(color));
@@ -177,12 +173,12 @@ namespace Ksu.Cis300.MapViewer
         }
 
         /// <summary>
-        /// 
+        /// Draw the given Tree.
         /// </summary>
-        /// <param name="t"></param>
-        /// <param name="g"></param>
-        /// <param name="zoom"></param>
-        /// <param name="sacle"></param>
+        /// <param name="t"> Tree given. </param>
+        /// <param name="g"> Graphics given </param>
+        /// <param name="zoom"> Zoom value given. </param>
+        /// <param name="sacle">Scale value given. </param>
         public static void Draw(BinaryTreeNode<MapData> t, Graphics g, int zoom, int scale)
         {
             float x = t.Data.Bounds.X * scale;

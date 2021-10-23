@@ -35,8 +35,8 @@ namespace Ksu.Cis300.MapViewer
             this.uxZoomIn = new System.Windows.Forms.ToolStripButton();
             this.uxZoomOut = new System.Windows.Forms.ToolStripButton();
             this.uxMapContainer = new System.Windows.Forms.FlowLayoutPanel();
-            this.Map = new Ksu.Cis300.MapViewer.Map();
             this.uxOpenDialog = new System.Windows.Forms.OpenFileDialog();
+            this.Map = new Ksu.Cis300.MapViewer.Map();
             this.uxButtonBar.SuspendLayout();
             this.uxMapContainer.SuspendLayout();
             this.SuspendLayout();
@@ -87,11 +87,17 @@ namespace Ksu.Cis300.MapViewer
             // 
             // uxMapContainer
             // 
+            this.uxMapContainer.AutoScroll = true;
             this.uxMapContainer.Controls.Add(this.Map);
             this.uxMapContainer.Location = new System.Drawing.Point(0, 28);
             this.uxMapContainer.Name = "uxMapContainer";
             this.uxMapContainer.Size = new System.Drawing.Size(800, 410);
             this.uxMapContainer.TabIndex = 1;
+            // 
+            // uxOpenDialog
+            // 
+            this.uxOpenDialog.FileName = "openFileDialog1";
+            this.uxOpenDialog.Filter = "CSV files|*.csv|All files|*.*";
             // 
             // Map
             // 
@@ -101,10 +107,6 @@ namespace Ksu.Cis300.MapViewer
             this.Map.Size = new System.Drawing.Size(150, 150);
             this.Map.TabIndex = 0;
             this.Map.Tree = null;
-            // 
-            // uxOpenDialog
-            // 
-            this.uxOpenDialog.FileName = "openFileDialog1";
             // 
             // UserInterface
             // 

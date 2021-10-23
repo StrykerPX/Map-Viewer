@@ -14,27 +14,27 @@ namespace Ksu.Cis300.MapViewer
     public partial class Map : UserControl
     {
         /// <summary>
-        /// 
+        /// Initialized sacle value.
         /// </summary>
         private const int _initialScale = 10;
 
         /// <summary>
-        /// 
+        /// Tree to draw onto the map.
         /// </summary>
         private BinaryTreeNode<MapData> _tree;
 
         /// <summary>
-        /// 
+        /// Zoom value of the map.
         /// </summary>
         private int _zoom;
 
         /// <summary>
-        /// 
+        /// sale value of the map.
         /// </summary>
         private int _scale = _initialScale;
 
         /// <summary>
-        /// 
+        /// Get and set the Tree.
         /// </summary>
         public BinaryTreeNode<MapData> Tree
         {
@@ -65,9 +65,9 @@ namespace Ksu.Cis300.MapViewer
         }
 
         /// <summary>
-        /// 
+        /// Increase zoom value.
         /// </summary>
-        /// <returns></returns>
+        /// <returns> New zoom value. </returns>
         public int ZoomIn()
         {
             _zoom++;
@@ -80,12 +80,12 @@ namespace Ksu.Cis300.MapViewer
         }
 
         /// <summary>
-        /// 
+        /// Decrease zoom value.
         /// </summary>
         /// <returns></returns>
         public int ZoomOut()
         {
-            _zoom++;
+            _zoom--;
             _scale /= 2;
 
             Width /= 2;
@@ -94,21 +94,27 @@ namespace Ksu.Cis300.MapViewer
             return _zoom;
         }
 
+        /// <summary>
+        /// Redraw the map.
+        /// </summary>
+        /// <param name="e"> PaintEventArgs. </param>
         protected override void OnPaint(PaintEventArgs e)
         {
             Rectangle rectangle = e.ClipRectangle;
-            Graphics gObject = e.Graphics;
+            Graphics g = e.Graphics;
 
-            if (_tree != null && gObject != null)
+            if (_tree != null && g != null)
             {
                 Region region = new Region(rectangle);
-                gObject.Clip = region;
+                g.Clip = region;
+
+                QuadTree.Draw(_tree, g, _zoom, _scale);
             }
             base.OnPaint(e);
         }
 
         /// <summary>
-        /// 
+        /// Create the map User Control.
         /// </summary>
         public Map()
         {
