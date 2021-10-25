@@ -1,4 +1,7 @@
-﻿using Ksu.Cis300.ImmutableBinaryTrees;
+﻿/* Map.cs
+ * Created by: Sicheng Chen
+ */
+using Ksu.Cis300.ImmutableBinaryTrees;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,20 +48,26 @@ namespace Ksu.Cis300.MapViewer
 
             set
             {
+                //Initialize tree to value.
                 _tree = value;
 
+                // Check if tree is null.
                 if (_tree != null)
                 {
+                    // Initialize map scale.
                     _scale = _initialScale;
 
+                    // Scale map size according to scale value.
                     Width = (int)_tree.Data.Bounds.Width * _scale;
                     Height = (int)_tree.Data.Bounds.Height * _scale;
 
+                    // Increment Size by 1.
                     Width += 1;
                     Height += 1;
 
-                    _zoom = 1;
-                    Invalidate();
+
+                    _zoom = 1;      // Initialize zoom value to 1.
+                    Invalidate();   // Redraw map.
                     
                 }
             }
@@ -70,13 +79,13 @@ namespace Ksu.Cis300.MapViewer
         /// <returns> New zoom value. </returns>
         public int ZoomIn()
         {
-            _zoom++;
-            _scale *= 2;
+            _zoom++;        // Increment zoom value.
+            _scale *= 2;    // Double the sacle value.
 
-            Width *= 2;
-            Height *= 2;
+            Width *= 2;     // Double the width.
+            Height *= 2;    // Double the height.
 
-            return _zoom;
+            return _zoom;   //Return the new zoom value.
         }
 
         /// <summary>
@@ -85,13 +94,13 @@ namespace Ksu.Cis300.MapViewer
         /// <returns></returns>
         public int ZoomOut()
         {
-            _zoom--;
-            _scale /= 2;
+            _zoom--;        // Decrement zoom value.
+            _scale /= 2;    // Half the sacle value.
 
-            Width /= 2;
-            Height /= 2;
+            Width /= 2;     // Half the width.
+            Height /= 2;    // Half the height.
 
-            return _zoom;
+            return _zoom;   //Return the new zoom value.
         }
 
         /// <summary>
@@ -100,17 +109,20 @@ namespace Ksu.Cis300.MapViewer
         /// <param name="e"> PaintEventArgs. </param>
         protected override void OnPaint(PaintEventArgs e)
         {
+            // Create and initialze veriable use for the draw.
             Rectangle rectangle = e.ClipRectangle;
             Graphics g = e.Graphics;
 
+            // Check both the Tree and the Graphics veriable are NOT null.
             if (_tree != null && g != null)
             {
-                Region region = new Region(rectangle);
-                g.Clip = region;
+                Region region = new Region(rectangle);      // Create and initialize the region to the rectangle.
+                g.Clip = region;                            // Set the Graphics veriable draw bound to the region.
 
-                QuadTree.Draw(_tree, g, _zoom, _scale);
+
+                QuadTree.Draw(_tree, g, _zoom, _scale);     // Call the QudTree Draw() method.
             }
-            base.OnPaint(e);
+            base.OnPaint(e);                                // Paint graph onto the User Control.
         }
 
         /// <summary>

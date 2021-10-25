@@ -1,4 +1,7 @@
-﻿using Ksu.Cis300.ImmutableBinaryTrees;
+﻿/* UserInterface.cs
+ * Modifled by: Sicheng Chen
+ */
+using Ksu.Cis300.ImmutableBinaryTrees;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -16,19 +19,23 @@ namespace Ksu.Cis300.MapViewer
         /// <summary>
         /// Open and read map file.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender"> Event object. </param>
+        /// <param name="e"> Event Argument. </param>
         private void uxOpen_Click(object sender, EventArgs e)
         {
+            // Open FileDialog.
             if (uxOpenDialog.ShowDialog() == DialogResult.OK)
             {
                 try
                 {
+                    // Store tree built from file read.
                     Map.Tree = QuadTree.ReadFile(uxOpenDialog.FileName);
+
+                    // Handle button enable & disable.
                     uxZoomIn.Enabled = true;
                     uxZoomOut.Enabled = false;
                 }
-                catch(Exception ex)
+                catch(Exception ex)     // Handle Exception.
                 {
                     MessageBox.Show("Unable to open file: " + ex.ToString());
                 }
@@ -38,53 +45,68 @@ namespace Ksu.Cis300.MapViewer
         /// <summary>
         /// Zoom into the map.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender"> Event object. </param>
+        /// <param name="e"> Event Argument. </param>
         private void uxZoomIn_Click(object sender, EventArgs e)
         {
+            // Get center cord of the FlowLayoutPanel.
             int upperPositonX = Math.Abs(uxMapContainer.AutoScrollPosition.X);
             int upperPositonY = Math.Abs(uxMapContainer.AutoScrollPosition.Y);
 
+            // Get current size of the FlowLayoutPanel client.
             int sizeWidth = uxMapContainer.ClientSize.Width;
             int sizeHeight = uxMapContainer.ClientSize.Height;
 
+            // Calculate and store the new positon and size.
             Point newUpperPoiton = new Point(upperPositonX * 2, upperPositonY * 2);
             Size newSize = new Size(sizeWidth / 2, sizeHeight / 2);
 
+            // Zoom In.
+            // Handle button enable & disable.
             if (Map.ZoomIn() >= 7)
             {
                 uxZoomIn.Enabled = false;
             }
             uxZoomOut.Enabled = true;
 
+            // Set the new position.
             uxMapContainer.AutoScrollPosition = newUpperPoiton + newSize;
         }
 
         /// <summary>
         /// Zoom out of the map.
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+        /// <param name="sender"> Event object. </param>
+        /// <param name="e"> Event Argument. </param>
         private void uxZoomOut_Click(object sender, EventArgs e)
         {
+            // Get center cord of the FlowLayoutPanel.
             int upperPositonX = Math.Abs(uxMapContainer.AutoScrollPosition.X);
             int upperPositonY = Math.Abs(uxMapContainer.AutoScrollPosition.Y);
 
+            // Get current size of the FlowLayoutPanel client.
             int sizeWidth = uxMapContainer.ClientSize.Width;
             int sizeHeight = uxMapContainer.ClientSize.Height;
 
+            // Calculate and store the new positon and size.
             Point newUpperPoiton = new Point(upperPositonX * 2, upperPositonY * 2);
             Size newSize = new Size(sizeWidth / 2, sizeHeight / 2);
 
+            // Zoom Out
+            // Handle button enable & disable.
             if (Map.ZoomOut() <= 1)
             {
                 uxZoomOut.Enabled = false;
             }
             uxZoomIn.Enabled = true;
 
+            // Set the new position.
             uxMapContainer.AutoScrollPosition = newUpperPoiton - newSize;
         }
 
+        /// <summary>
+        /// Create UserInterface form.
+        /// </summary>
         public UserInterface()
         {
             InitializeComponent();
