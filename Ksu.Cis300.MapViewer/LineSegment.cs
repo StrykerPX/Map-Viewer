@@ -65,7 +65,7 @@ namespace Ksu.Cis300.MapViewer
         public void Split(float x, out LineSegment left, out LineSegment right)
         {
             // Calculate and store the Y cord using the slope.
-            float slope = (Start.Y - End.Y) / (Start.X - End.X) * (x - Start.X) + Start.Y;
+            float slope = (End.Y - Start.Y) / (End.X - Start.X) * (x - Start.X) + Start.Y;
 
             PointF splitPoint= new PointF(x, slope);    // create new split point.
 

@@ -14,6 +14,9 @@ using System.Windows.Forms;
 
 namespace Ksu.Cis300.MapViewer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class Map : UserControl
     {
         /// <summary>
@@ -58,8 +61,8 @@ namespace Ksu.Cis300.MapViewer
                     _scale = _initialScale;
 
                     // Scale map size according to scale value.
-                    Width = (int)_tree.Data.Bounds.Width * _scale;
-                    Height = (int)_tree.Data.Bounds.Height * _scale;
+                    Width = (int)(_tree.Data.Bounds.Width * _scale);
+                    Height = (int)(_tree.Data.Bounds.Height * _scale);
 
                     // Increment Size by 1.
                     Width += 1;
@@ -67,8 +70,8 @@ namespace Ksu.Cis300.MapViewer
 
 
                     _zoom = 1;      // Initialize zoom value to 1.
-                    Invalidate();   // Redraw map.
-                    
+                    Invalidate();   // Mark the Control for redraw.
+
                 }
             }
         }
@@ -85,7 +88,8 @@ namespace Ksu.Cis300.MapViewer
             Width *= 2;     // Double the width.
             Height *= 2;    // Double the height.
 
-            return _zoom;   //Return the new zoom value.
+            Invalidate();   // Mark the Control for redraw.
+            return _zoom;   // Return the new zoom value.
         }
 
         /// <summary>
@@ -100,7 +104,8 @@ namespace Ksu.Cis300.MapViewer
             Width /= 2;     // Half the width.
             Height /= 2;    // Half the height.
 
-            return _zoom;   //Return the new zoom value.
+            Invalidate();   // Mark the Control for redraw.
+            return _zoom;   // Return the new zoom value.
         }
 
         /// <summary>

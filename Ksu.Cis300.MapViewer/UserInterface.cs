@@ -14,6 +14,9 @@ using System.Windows.Forms;
 
 namespace Ksu.Cis300.MapViewer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public partial class UserInterface : Form
     {
         /// <summary>
@@ -30,6 +33,7 @@ namespace Ksu.Cis300.MapViewer
                 {
                     // Store tree built from file read.
                     Map.Tree = QuadTree.ReadFile(uxOpenDialog.FileName);
+                    uxMapContainer.AutoScrollPosition = new Point(0, 0);
 
                     // Handle button enable & disable.
                     uxZoomIn.Enabled = true;
@@ -54,12 +58,11 @@ namespace Ksu.Cis300.MapViewer
             int upperPositonY = Math.Abs(uxMapContainer.AutoScrollPosition.Y);
 
             // Get current size of the FlowLayoutPanel client.
-            int sizeWidth = uxMapContainer.ClientSize.Width;
-            int sizeHeight = uxMapContainer.ClientSize.Height;
+            int sizeWidth = uxMapContainer.ClientSize.Width / 2;
+            int sizeHeight = uxMapContainer.ClientSize.Height / 2;
 
             // Calculate and store the new positon and size.
-            Point newUpperPoiton = new Point(upperPositonX * 2, upperPositonY * 2);
-            Size newSize = new Size(sizeWidth / 2, sizeHeight / 2);
+            Point newUpperPoiton = new Point(upperPositonX * 2 + sizeWidth, upperPositonY * 2 + sizeHeight);
 
             // Zoom In.
             // Handle button enable & disable.
@@ -70,7 +73,7 @@ namespace Ksu.Cis300.MapViewer
             uxZoomOut.Enabled = true;
 
             // Set the new position.
-            uxMapContainer.AutoScrollPosition = newUpperPoiton + newSize;
+            uxMapContainer.AutoScrollPosition = newUpperPoiton;
         }
 
         /// <summary>
@@ -85,12 +88,11 @@ namespace Ksu.Cis300.MapViewer
             int upperPositonY = Math.Abs(uxMapContainer.AutoScrollPosition.Y);
 
             // Get current size of the FlowLayoutPanel client.
-            int sizeWidth = uxMapContainer.ClientSize.Width;
-            int sizeHeight = uxMapContainer.ClientSize.Height;
+            int sizeWidth = uxMapContainer.ClientSize.Width  / 4;
+            int sizeHeight = uxMapContainer.ClientSize.Height / 4;
 
             // Calculate and store the new positon and size.
-            Point newUpperPoiton = new Point(upperPositonX * 2, upperPositonY * 2);
-            Size newSize = new Size(sizeWidth / 2, sizeHeight / 2);
+            Point newUpperPoiton = new Point(upperPositonX / 2 - sizeWidth, upperPositonY / 2 - sizeHeight);
 
             // Zoom Out
             // Handle button enable & disable.
@@ -101,7 +103,7 @@ namespace Ksu.Cis300.MapViewer
             uxZoomIn.Enabled = true;
 
             // Set the new position.
-            uxMapContainer.AutoScrollPosition = newUpperPoiton - newSize;
+            uxMapContainer.AutoScrollPosition = newUpperPoiton;
         }
 
         /// <summary>

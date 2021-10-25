@@ -13,6 +13,9 @@ using System.IO;
 
 namespace Ksu.Cis300.MapViewer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     static class QuadTree
     {
         /// <summary>
@@ -57,7 +60,7 @@ namespace Ksu.Cis300.MapViewer
                 else
                 {
                     // Get the top and bottom bound.
-                    RectangleF topBounds = new RectangleF(bounds.X, bounds.Y, (bounds.Width) / 2, bounds.Height);
+                    RectangleF topBounds = new RectangleF(bounds.X, bounds.Y, (bounds.Width), bounds.Height / 2);
                     RectangleF bottomBounds = new RectangleF(bounds.X, bounds.Y + (bounds.Height) / 2, bounds.Width, (bounds.Height) / 2);
 
                     // Check if the area of the bound is less than the threshold or not.
@@ -80,7 +83,7 @@ namespace Ksu.Cis300.MapViewer
         /// <param name="zoom"> Zoom value of the line. </param>
         private static void AddLine(BinaryTreeNode<MapData> t, LineSegment line, int zoom)
         {
-            if (zoom == t.Data.Zoom)    // Check if the current zoom value given is equal to the 
+            if (zoom == t.Data.Zoom)    // Check if the current zoom value given is equal to the max.
             {
                 t.Data.Lines.Add(line);     // Add the line given.
             }
@@ -222,9 +225,9 @@ namespace Ksu.Cis300.MapViewer
             RectangleF rectangle = new RectangleF(x, y, width, height);
 
             // Check if the new rectangle intersect with the Graphic bound.
-            if (rectangle.IntersectsWith(g.ClipBounds))
+            if (g.ClipBounds.IntersectsWith(rectangle))
             {
-                // Check if the tress is a Quad Tree.
+                // Check if the Tree is a Quad Tree.
                 if (t.Data.Lines != null)
                 {
                     // Draw all lines stored in MapData of the Tree.

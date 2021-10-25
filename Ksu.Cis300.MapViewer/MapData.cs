@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Ksu.Cis300.MapViewer
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public struct MapData
     {
         /// <summary>
