@@ -15,12 +15,12 @@ using System.Windows.Forms;
 namespace Ksu.Cis300.MapViewer
 {
     /// <summary>
-    /// 
+    /// Class description and methods for UserControl Map.
     /// </summary>
     public partial class Map : UserControl
     {
         /// <summary>
-        /// Initialized sacle value.
+        /// Initialized scale value.
         /// </summary>
         private const int _initialScale = 10;
 
@@ -40,7 +40,7 @@ namespace Ksu.Cis300.MapViewer
         private int _scale = _initialScale;
 
         /// <summary>
-        /// Get and set the Tree.
+        /// Get and set the Tree Property.
         /// </summary>
         public BinaryTreeNode<MapData> Tree
         {
@@ -114,24 +114,24 @@ namespace Ksu.Cis300.MapViewer
         /// <param name="e"> PaintEventArgs. </param>
         protected override void OnPaint(PaintEventArgs e)
         {
-            // Create and initialze veriable use for the draw.
+            // Create and initialze veriable used for the draw.
             Rectangle rectangle = e.ClipRectangle;
             Graphics g = e.Graphics;
 
-            // Check both the Tree and the Graphics veriable are NOT null.
+            // Check both the Tree and the Graphic veriables are NOT null.
             if (_tree != null && g != null)
             {
                 Region region = new Region(rectangle);      // Create and initialize the region to the rectangle.
-                g.Clip = region;                            // Set the Graphics veriable draw bound to the region.
+                g.Clip = region;                            // Set the Graphic veriable draw bound to the region.
 
 
                 QuadTree.Draw(_tree, g, _zoom, _scale);     // Call the QudTree Draw() method.
             }
-            base.OnPaint(e);                                // Paint graph onto the User Control.
+            base.OnPaint(e);                                // Paint graph onto the UserControl.
         }
 
         /// <summary>
-        /// Create the map User Control.
+        /// Create the map UserControl.
         /// </summary>
         public Map()
         {

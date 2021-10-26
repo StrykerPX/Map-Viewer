@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Ksu.Cis300.MapViewer
 {
+    /// <summary>
+    /// Class description and constructor for LineSegment.
+    /// </summary>
     public struct LineSegment
     {
         /// <summary>
@@ -20,7 +23,7 @@ namespace Ksu.Cis300.MapViewer
         /// <summary>
         /// Ending point of the line.
         /// </summary>
-        public PointF End { get;  }
+        public PointF End { get; }
 
         /// <summary>
         /// Pen property used to draw the line.
@@ -69,7 +72,7 @@ namespace Ksu.Cis300.MapViewer
 
             PointF splitPoint= new PointF(x, slope);    // create new split point.
 
-            // Initialize and Output the left and right segment of the split/
+            // Initialize and Output the left and right segment after split.
             left = new LineSegment(Start, splitPoint, Pen);
             right = new LineSegment(splitPoint, End, Pen);
         }

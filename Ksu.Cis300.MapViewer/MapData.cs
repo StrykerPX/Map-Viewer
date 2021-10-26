@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Ksu.Cis300.MapViewer
 {
     /// <summary>
-    /// 
+    /// Class description and constructor for MapData.
     /// </summary>
     public struct MapData
     {
@@ -26,7 +26,7 @@ namespace Ksu.Cis300.MapViewer
         public int Zoom { get; }
 
         /// <summary>
-        /// List of lines within the map.
+        /// List of lines stored within the map.
         /// </summary>
         public List<LineSegment> Lines { get; }
 
@@ -35,7 +35,7 @@ namespace Ksu.Cis300.MapViewer
         /// </summary>
         /// <param name="bounds"> Rectangle bound of the entire map. </param>
         /// <param name="zoom"> Zoom value the current map is at. </param>
-        /// <param name="isQuadTreeNode"> Boolean of whether the data is stored in a Quad Tree </param>
+        /// <param name="isQuadTreeNode"> Boolean of whether the data is stored in a Quad Tree or not. </param>
         public MapData(RectangleF bounds, int zoom, bool isQuadTreeNode)
         {
             Bounds = bounds;

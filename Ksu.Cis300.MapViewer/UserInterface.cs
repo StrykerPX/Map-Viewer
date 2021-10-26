@@ -15,7 +15,7 @@ using System.Windows.Forms;
 namespace Ksu.Cis300.MapViewer
 {
     /// <summary>
-    /// 
+    /// Class description and event methods for UserInterface Form.
     /// </summary>
     public partial class UserInterface : Form
     {
@@ -61,7 +61,7 @@ namespace Ksu.Cis300.MapViewer
             int sizeWidth = uxMapContainer.ClientSize.Width / 2;
             int sizeHeight = uxMapContainer.ClientSize.Height / 2;
 
-            // Calculate and store the new positon and size.
+            // Calculate and store the new positon.
             Point newUpperPoiton = new Point(upperPositonX * 2 + sizeWidth, upperPositonY * 2 + sizeHeight);
 
             // Zoom In.
@@ -91,7 +91,7 @@ namespace Ksu.Cis300.MapViewer
             int sizeWidth = uxMapContainer.ClientSize.Width  / 4;
             int sizeHeight = uxMapContainer.ClientSize.Height / 4;
 
-            // Calculate and store the new positon and size.
+            // Calculate and store the new positon.
             Point newUpperPoiton = new Point(upperPositonX / 2 - sizeWidth, upperPositonY / 2 - sizeHeight);
 
             // Zoom Out
@@ -107,7 +107,7 @@ namespace Ksu.Cis300.MapViewer
         }
 
         /// <summary>
-        /// Create UserInterface form.
+        /// Create UserInterface Form.
         /// </summary>
         public UserInterface()
         {

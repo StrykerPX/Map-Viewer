@@ -6,6 +6,9 @@ using System.Windows.Forms;
 
 namespace Ksu.Cis300.MapViewer
 {
+    /// <summary>
+    /// Class to run the program.
+    /// </summary>
     static class Program
     {
         /// <summary>

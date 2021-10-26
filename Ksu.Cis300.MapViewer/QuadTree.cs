@@ -14,7 +14,7 @@ using System.IO;
 namespace Ksu.Cis300.MapViewer
 {
     /// <summary>
-    /// 
+    /// Class description and methods for QuadTree.
     /// </summary>
     static class QuadTree
     {
@@ -31,10 +31,10 @@ namespace Ksu.Cis300.MapViewer
         /// <summary>
         /// Build a tree of given type.
         /// </summary>
-        /// <param name="bounds"> bounds of the rectangle.  </param>
+        /// <param name="bounds"> bounds of the map. </param>
         /// <param name="zoom"> Zoom value of the tree. </param>
         /// <param name="isQuadTreeNode"> Boolean of whether the tree is a Quad Tree. </param>
-        /// <returns> Built Tree. </returns>
+        /// <returns> Tree Built. </returns>
         private static BinaryTreeNode<MapData> BuildTree(RectangleF bounds, int zoom, bool isQuadTreeNode)
         {
             // Create MapData using the premeter.
